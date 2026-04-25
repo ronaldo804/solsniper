@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELON DUCK [DUCK] | Antigravity Pump</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="coin-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+    <div class="background-glow"></div>
+
+    <header class="navbar">
+        <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+            <span class="logo-icon">🚀</span>
+            <span class="logo-text">ANTIGRAVITY <span class="accent">PUMP</span></span>
+        </div>
+        <div class="nav-actions">
+            <button class="btn-primary">0x8b...f6</button>
+        </div>
+    </header>
+
+    <main class="coin-container">
+        <div class="coin-main-content">
+            <!-- Left Side: Chart & Info -->
+            <div class="left-panel">
+                <div class="coin-header">
+                    <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=loading" alt="Loading" class="coin-large-img" id="coinImg">
+                    <div class="title-area">
+                        <h1 id="coinTitle">Loading Token...</h1>
+                        <p class="ca-row">CA: <span class="addr" id="coinAddr">Connecting...</span> <i data-lucide="copy" class="copy-icon"></i></p>
+                    </div>
+                    <div class="price-info">
+                        <span class="price" id="coinPrice">$0.00</span>
+                        <span class="change positive" id="coinChange">--%</span>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div id="chartArea" style="width: 100%; height: 500px;"></div>
+                </div>
+
+                <div class="coin-description">
+                    <h3>About Token</h3>
+                    <p id="coinDescriptionText">Loading description from Pump.fun...</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Trading Panel -->
+            <div class="right-panel">
+                <div class="trade-card">
+                    <div class="trade-tabs">
+                        <button class="trade-tab active" id="buyTab">Buy</button>
+                        <button class="trade-tab" id="sellTab">Sell</button>
+                    </div>
+
+                    <div class="trade-input-area">
+                        <div class="input-header">
+                            <span>Amount</span>
+                            <span class="sol-balance">0.00 SOL available</span>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="number" placeholder="0.0" id="tradeAmount">
+                            <span class="input-denom">SOL</span>
+                        </div>
+                        <div class="quick-amounts">
+                            <button>0.1</button><button>0.5</button><button>1</button><button>5</button>
+                        </div>
+                    </div>
+
+                    <div class="fee-info">
+                        <div class="fee-row">
+                            <span>Platform Fee (1%)</span>
+                            <span id="platformFee">0.00 SOL</span>
+                        </div>
+                        <div class="fee-row">
+                            <span>Total</span>
+                            <span id="totalAmount">0.00 SOL</span>
+                        </div>
+                    </div>
+
+                    <button class="btn-execute-trade">Place Trade</button>
+                </div>
+
+                <div class="progress-card">
+                    <h3>Bonding Curve Progress</h3>
+                    <div class="progress-bar-large">
+                        <div class="progress-fill-large" style="width: 45%;"></div>
+                    </div>
+                    <p class="progress-hint">Graduate this coin to Raydium when market cap reaches 85 SOL ($17,000).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom: Live Activity -->
+        <section class="activity-section">
+            <h3>Live Activity</h3>
+            <div class="activity-table">
+                <div class="table-header">
+                    <span>Account</span><span>Type</span><span>SOL</span><span>Time</span>
+                </div>
+                <div class="activity-rows" id="activityRows">
+                    <!-- Rows will be here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="coin.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

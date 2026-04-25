@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity Pump | Solana Meme Launchpad</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
+</head>
+<body>
+    <div class="background-glow"></div>
+
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-icon">🚀</span>
+            <span class="logo-text">ANTIGRAVITY <span class="accent">PUMP</span></span>
+        </div>
+        <div class="nav-search">
+            <i data-lucide="search"></i>
+            <input type="text" placeholder="Search by name or mint address...">
+        </div>
+        <div class="nav-actions">
+            <div class="wallet-info-pill" id="walletInfoPill" style="display: none;">
+                <span class="wallet-balance" id="mainWalletBalance">0.00 SOL</span>
+                <span class="wallet-addr-short" id="mainWalletAddr">0x00...00</span>
+            </div>
+            <button class="btn-sniper" id="openSniper">🎯 Fast Trade</button>
+            <button class="btn-primary" id="connectWallet">Connect Wallet</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- King of the Hill -->
+        <section class="koth-section">
+            <div class="section-tag">🔥 KING OF THE HILL</div>
+            <div class="koth-card">
+                <div class="koth-info">
+                    <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=PepeKing" alt="King Coin" class="koth-img">
+                    <div class="koth-details">
+                        <h2>$PEPE ON SOL</h2>
+                        <p class="creator">Created by: <span class="addr">7xAz...9u1p</span></p>
+                        <div class="stats-row">
+                            <div class="stat">
+                                <span class="label">Market Cap</span>
+                                <span class="value">$58,420</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">Replies</span>
+                                <span class="value">428</span>
+                            </div>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-label">
+                                <span>Bonding Curve Progress</span>
+                                <span class="percent">85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-buy-koth">Quick Buy 0.1 SOL</button>
+            </div>
+        </section>
+
+        <!-- Live Feed Grid -->
+        <section class="live-feed">
+            <div class="filter-bar">
+                <button class="filter-btn active">Terminal</button>
+                <button class="filter-btn">Newest</button>
+                <button class="filter-btn">Following</button>
+                <div class="launch-btn-container">
+                    <button class="btn-launch">[ START A NEW COIN ]</button>
+                </div>
+            </div>
+
+            <div class="coin-grid" id="coinGrid">
+                <!-- Coins will be injected here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Sniper / Burner Wallet Modal -->
+    <div id="sniperModal" class="modal">
+        <div class="modal-content sniper-content">
+            <div class="modal-header">
+                <h2>🎯 Fast Trade Settings</h2>
+                <i data-lucide="x" class="close-modal" id="closeSniper"></i>
+            </div>
+            
+            <div class="burner-status-card">
+                <div class="status-header">
+                    <span>Burner Wallet Status</span>
+                    <span class="status-active" id="walletStatus">Not Created</span>
+                </div>
+                <div class="address-box" id="burnerAddress">None</div>
+
+                <!-- Private Key Display Area -->
+                <div class="privkey-box" id="privKeyArea" style="display: none;">
+                    <div class="status-header">
+                        <span>Private Key (Secret)</span>
+                        <span class="timer" id="keyTimer">60s</span>
+                    </div>
+                    <div class="key-display">
+                        <span id="actualPrivKey">••••••••••••••••</span>
+                        <i data-lucide="copy" class="copy-icon" id="copyPrivKey"></i>
+                    </div>
+                </div>
+                
+                <div class="deposit-area" id="depositArea" style="display: none;">
+                    <div class="input-wrapper mini">
+                        <input type="number" id="depositAmount" placeholder="0.1" step="0.1">
+                        <span class="denom">SOL</span>
+                    </div>
+                    <button class="btn-deposit" id="confirmDeposit">Deposit from Phantom</button>
+                </div>
+
+                <div class="balance-box">
+                    <span class="label">Balance:</span>
+                    <span class="value" id="burnerBalance">0.00 SOL</span>
+                </div>
+            </div>
+
+            <div class="sniper-actions">
+                <button class="btn-generate" id="generateBurner">Generate New Wallet</button>
+                <button class="btn-import-toggle" id="viewPrivKeyBtn" style="display: none;">👁️ View Private Key</button>
+                <button class="btn-import-toggle" id="toggleImport">Import Existing Wallet</button>
+                
+                <div id="importArea" style="display: none; margin-top: 15px;">
+                    <div class="input-wrapper mini">
+                        <input type="text" id="importPrivKey" placeholder="Paste Private Key (Base58)">
+                    </div>
+                    <button class="btn-deposit" id="confirmImport">Restore Wallet</button>
+                </div>
+
+                <p class="warning-text" style="margin-top: 15px;">⚠️ Private key is stored locally in your browser. Don't deposit large amounts.</p>
+            </div>
+
+            <div class="auto-settings">
+                <div class="setting-row">
+                    <span>Auto-Sign Enabled</span>
+                    <label class="switch">
+                        <input type="checkbox" id="autoSignToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="status-dot"></div>
+        <span>Mainnet-Beta: 2,450 TPS</span>
+        <span class="sep">|</span>
+        <span>Platform Fee: 1%</span>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tweetnacl/1.0.3/nacl-fast.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
