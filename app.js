@@ -230,6 +230,38 @@ function generateBurnerWallet() {
     alert(`✅ Real Solana Wallet Generated!\n\n📍 Address: ${address.slice(0,8)}...\n\n⚠️ Save your Private Key before clearing browser data!`);
 }
 
+async function refreshWalletUI() {
+    const walletStatus = document.getElementById('walletStatus');
+    const walletAddress = document.getElementById('walletAddress');
+    const walletBalance = document.getElementById('walletBalance');
+    const burner = JSON.parse(localStorage.getItem('burnerWallet'));
+
+    if (burner && burner.secretKeyArray) {
+        try {
+            const secretKey = new Uint8Array(burner.secretKeyArray);
+            const keypair = solanaWeb3.Keypair.fromSecretKey(secretKey);
+            const pubkey = keypair.publicKey;
+
+            walletStatus.innerText = "ACTIVE";
+            walletStatus.className = "status-tag active";
+            walletAddress.innerText = pubkey.toBase58();
+
+            // Fetch REAL Balance from Solana Blockchain
+            const connection = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com");
+            const balance = await connection.getBalance(pubkey);
+            walletBalance.innerText = (balance / solanaWeb3.LAMPORTS_PER_SOL).toFixed(3);
+        } catch (err) {
+            console.error("Wallet error:", err);
+            walletStatus.innerText = "ERROR";
+        }
+    } else {
+        walletStatus.innerText = "NOT GENERATED";
+        walletStatus.className = "status-tag inactive";
+        walletAddress.innerText = "Please generate a new wallet";
+        walletBalance.innerText = "0.000";
+    }
+}
+
 function updateBurnerUI(burner) {
     if (burner) {
         burnerAddressEl.innerText = burner.address;
@@ -238,6 +270,7 @@ function updateBurnerUI(burner) {
         document.getElementById('autoSignToggle').checked = burner.autoSign;
         document.getElementById('depositArea').style.display = 'block';
         document.getElementById('viewPrivKeyBtn').style.display = 'block';
+        refreshWalletUI(); // Fetch balance immediately
     }
 }
 
