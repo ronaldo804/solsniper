@@ -40,20 +40,27 @@ const coinGrid = document.getElementById('coinGrid');
 
 async function fetchRealCoins() {
     try {
-        console.log("Fetching live tokens from Pump.fun...");
-        // Fetching the most active coins
-        const response = await fetch('https://frontend-api.pump.fun/coins?offset=0&limit=30&sort=last_reply&order=DESC&includeNsfw=false');
-        const coins = await response.json();
+        console.log("Fetching live tokens from Pump.fun via Proxy...");
+        // Using a reliable CORS proxy to bypass browser restrictions
+        const proxyUrl = "https://api.allorigins.win/get?url=";
+        const apiUrl = encodeURIComponent('https://frontend-api.pump.fun/coins?offset=0&limit=30&sort=last_reply&order=DESC&includeNsfw=false');
+        
+        const response = await fetch(`${proxyUrl}${apiUrl}`);
+        const data = await response.json();
+        const coins = JSON.parse(data.contents);
         
         if (coins && coins.length > 0) {
-            // Update King of the Hill (The first coin in the list is usually very active)
+            // Update King of the Hill
             updateKOTH(coins[0]);
             // Render the rest in the grid
             renderRealCoins(coins.slice(1));
         }
     } catch (err) {
-        console.warn("API blocked or down, using fallback display.");
-        renderRealCoins(MOCK_COINS);
+        console.error("Real API Error:", err);
+        // If everything fails, show a clear message or retry
+        if (coinGrid.innerHTML === "") {
+            coinGrid.innerHTML = '<p style="color:white; text-align:center; grid-column: 1/-1;">⏳ Syncing with Solana Blockchain...</p>';
+        }
     }
 }
 
