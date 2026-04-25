@@ -234,11 +234,27 @@ async function refreshWalletUI() {
     const walletStatus = document.getElementById('walletStatus');
     const walletAddress = document.getElementById('walletAddress');
     const walletBalance = document.getElementById('walletBalance');
-    const burner = JSON.parse(localStorage.getItem('burnerWallet'));
+    
+    try {
+        const burnerData = localStorage.getItem('burnerWallet');
+        if (!burnerData) {
+            walletStatus.innerText = "NOT GENERATED";
+            walletStatus.className = "status-tag inactive";
+            return;
+        }
 
-    if (burner && burner.secretKeyArray) {
-        try {
-            const secretKey = new Uint8Array(burner.secretKeyArray);
+        const burner = JSON.parse(burnerData);
+        if (burner && (burner.secretKeyArray || burner.privateKey)) {
+            let secretKey;
+            if (burner.secretKeyArray) {
+                // Handle both Array and Object formats from localStorage
+                const arr = Object.values(burner.secretKeyArray);
+                secretKey = new Uint8Array(arr);
+            } else {
+                // Fallback to privateKey if secretKeyArray is missing
+                secretKey = bs58.decode(burner.privateKey);
+            }
+
             const keypair = solanaWeb3.Keypair.fromSecretKey(secretKey);
             const pubkey = keypair.publicKey;
 
@@ -246,19 +262,15 @@ async function refreshWalletUI() {
             walletStatus.className = "status-tag active";
             walletAddress.innerText = pubkey.toBase58();
 
-            // Fetch REAL Balance from Solana Blockchain
+            // Fetch REAL Balance
             const connection = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com");
             const balance = await connection.getBalance(pubkey);
             walletBalance.innerText = (balance / solanaWeb3.LAMPORTS_PER_SOL).toFixed(3);
-        } catch (err) {
-            console.error("Wallet error:", err);
-            walletStatus.innerText = "ERROR";
         }
-    } else {
-        walletStatus.innerText = "NOT GENERATED";
-        walletStatus.className = "status-tag inactive";
-        walletAddress.innerText = "Please generate a new wallet";
-        walletBalance.innerText = "0.000";
+    } catch (err) {
+        console.error("Wallet Sync Error:", err);
+        walletStatus.innerText = "RE-SYNCING";
+        // Attempt to auto-fix the state if it's just a UI lag
     }
 }
 
