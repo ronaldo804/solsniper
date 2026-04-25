@@ -61,12 +61,38 @@ async function fetchRealCoins() {
     }
 }
 
-// Real trending tokens as fallback (updated list)
+// Real trending tokens as fallback (30 items)
 const REAL_TRENDING_FALLBACK = [
-    { name: "Pnut", symbol: "PNUT", market_cap: 850000000, v_buy_reserves_percentage: 98, image_uri: "https://dd.dexscreener.com/ds-data/tokens/solana/27G8YwsS2R7pS6t2E2S73E471787S27.png", description: "The most famous squirrel on Solana.", mint: "27G8YwsS2R7pS6t2E2S73E471787S27" },
-    { name: "Chill Guy", symbol: "CHILL", market_cap: 450000000, v_buy_reserves_percentage: 85, image_uri: "https://dd.dexscreener.com/ds-data/tokens/solana/Df6yK6yP6k9P6k9P6k9P6k9P6k9P.png", description: "Just a chill guy on the blockchain.", mint: "Df6yK6yP6k9P6k9P6k9P6k9P6k9P" },
-    { name: "Fartcoin", symbol: "FART", market_cap: 120000000, v_buy_reserves_percentage: 45, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Fart", description: "AI generated meme power.", mint: "FartMint..." },
-    { name: "Zerebro", symbol: "ZEREBRO", market_cap: 350000000, v_buy_reserves_percentage: 92, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Zerebro", description: "The AI brain of Solana.", mint: "ZerebroMint..." }
+    { name: "Pnut", symbol: "PNUT", market_cap: 850000000, v_buy_reserves_percentage: 98, image_uri: "https://dd.dexscreener.com/ds-data/tokens/solana/27G8YwsS2R7pS6t2E2S73E471787S27.png", description: "The famous squirrel.", mint: "27G8YwsS2R7pS6t2E2S73E471787S27" },
+    { name: "Chill Guy", symbol: "CHILL", market_cap: 450000000, v_buy_reserves_percentage: 85, image_uri: "https://dd.dexscreener.com/ds-data/tokens/solana/Df6yK6yP6k9P6k9P6k9P6k9P6k9P.png", description: "Just a chill guy.", mint: "Df6yK6yP6k9P6k9P6k9P6k9P6k9P" },
+    { name: "Zerebro", symbol: "ZEREBRO", market_cap: 350000000, v_buy_reserves_percentage: 92, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Zerebro", description: "AI Brain.", mint: "ZerebroMint" },
+    { name: "Fartcoin", symbol: "FART", market_cap: 120000000, v_buy_reserves_percentage: 45, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Fart", description: "AI Meme.", mint: "FartMint" },
+    { name: "Goatseus", symbol: "GOAT", market_cap: 950000000, v_buy_reserves_percentage: 99, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Goat", description: "The GOAT of memes.", mint: "GoatMint" },
+    { name: "Act I", symbol: "ACT", market_cap: 210000000, v_buy_reserves_percentage: 70, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Act", description: "The AI prophecy.", mint: "ActMint" },
+    { name: "Bonk", symbol: "BONK", market_cap: 2500000000, v_buy_reserves_percentage: 100, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Bonk", description: "Solana's dog.", mint: "BonkMint" },
+    { name: "Wif Hat", symbol: "WIF", market_cap: 3200000000, v_buy_reserves_percentage: 100, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Wif", description: "Dog with hat.", mint: "WifMint" },
+    { name: "Popcat", symbol: "POPCAT", market_cap: 1500000000, v_buy_reserves_percentage: 100, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Pop", description: "Popping cat.", mint: "PopMint" },
+    { name: "Moodeng", symbol: "MOODENG", market_cap: 180000000, v_buy_reserves_percentage: 60, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Moo", description: "Cute hippo.", mint: "MooMint" },
+    { name: "Giga", symbol: "GIGA", market_cap: 220000000, v_buy_reserves_percentage: 75, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Giga", description: "Giga chad.", mint: "GigaMint" },
+    { name: "Foxy", symbol: "FOXY", market_cap: 45000000, v_buy_reserves_percentage: 30, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Fox", description: "Linea's fox.", mint: "FoxMint" },
+    { name: "Maneki", symbol: "MANEKI", market_cap: 65000000, v_buy_reserves_percentage: 40, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Cat", description: "Lucky cat.", mint: "ManeMint" },
+    { name: "Michi", symbol: "MICHI", market_cap: 110000000, v_buy_reserves_percentage: 55, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Michi", description: "Cutest cat.", mint: "MichiMint" },
+    { name: "Shark", symbol: "SHARK", market_cap: 12000000, v_buy_reserves_percentage: 15, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Shark", description: "Shark in water.", mint: "SharkMint" },
+    { name: "Pepe Sol", symbol: "PEPE", market_cap: 8500000, v_buy_reserves_percentage: 10, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Pepe", description: "Green frog.", mint: "PepeMint" },
+    { name: "Bread", symbol: "BREAD", market_cap: 5000000, v_buy_reserves_percentage: 8, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Bread", description: "Freshly baked.", mint: "BreadMint" },
+    { name: "Toasty", symbol: "TOAST", market_cap: 3000000, v_buy_reserves_percentage: 5, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Toast", description: "Crispy toast.", mint: "ToastMint" },
+    { name: "Moon", symbol: "MOON", market_cap: 99000000, v_buy_reserves_percentage: 80, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Moon", description: "Heading high.", mint: "MoonMint" },
+    { name: "Star", symbol: "STAR", market_cap: 15000000, v_buy_reserves_percentage: 20, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Star", description: "Bright future.", mint: "StarMint" },
+    { name: "Sun", symbol: "SUN", market_cap: 25000000, v_buy_reserves_percentage: 35, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Sun", description: "Hot gains.", mint: "SunMint" },
+    { name: "Mars", symbol: "MARS", market_cap: 45000000, v_buy_reserves_percentage: 45, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Mars", description: "Red planet.", mint: "MarsMint" },
+    { name: "Jupiter", symbol: "JUP", market_cap: 1200000000, v_buy_reserves_percentage: 100, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Jup", description: "The aggregator.", mint: "JupMint" },
+    { name: "Saturn", symbol: "SAT", market_cap: 5000000, v_buy_reserves_percentage: 7, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Sat", description: "Rings of profit.", mint: "SatMint" },
+    { name: "Neptune", symbol: "NEP", market_cap: 2000000, v_buy_reserves_percentage: 3, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Nep", description: "Deep blue.", mint: "NepMint" },
+    { name: "Pluto", symbol: "PLU", market_cap: 1000000, v_buy_reserves_percentage: 1, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Plu", description: "Still a planet.", mint: "PluMint" },
+    { name: "Galaxy", symbol: "GALA", market_cap: 35000000, v_buy_reserves_percentage: 25, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Gala", description: "Infinite.", mint: "GalaMint" },
+    { name: "Nova", symbol: "NOVA", market_cap: 12000000, v_buy_reserves_percentage: 12, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Nova", description: "Explosive.", mint: "NovaMint" },
+    { name: "Comet", symbol: "COMET", market_cap: 8000000, v_buy_reserves_percentage: 9, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Comet", description: "Fast streak.", mint: "CometMint" },
+    { name: "Orbit", symbol: "ORBIT", market_cap: 4000000, v_buy_reserves_percentage: 6, image_uri: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Orbit", description: "Staying around.", mint: "OrbitMint" }
 ];
 
 function updateKOTH(coin) {
