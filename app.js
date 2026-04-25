@@ -40,26 +40,30 @@ const coinGrid = document.getElementById('coinGrid');
 
 async function fetchRealCoins() {
     try {
-        console.log("Fetching live tokens from Pump.fun via Proxy...");
-        // Using a reliable CORS proxy to bypass browser restrictions
-        const proxyUrl = "https://api.allorigins.win/get?url=";
-        const apiUrl = encodeURIComponent('https://frontend-api.pump.fun/coins?offset=0&limit=30&sort=last_reply&order=DESC&includeNsfw=false');
+        console.log("Syncing with Solana Live Data...");
+        // Fast & Simple Proxy
+        const apiUrl = 'https://frontend-api.pump.fun/coins?offset=0&limit=30&sort=last_reply&order=DESC&includeNsfw=false';
+        const response = await fetch(`https://corsproxy.io/?${encodeURIComponent(apiUrl)}`);
         
-        const response = await fetch(`${proxyUrl}${apiUrl}`);
-        const data = await response.json();
-        const coins = JSON.parse(data.contents);
+        if (!response.ok) throw new Error("Proxy response not OK");
+        
+        const coins = await response.json();
         
         if (coins && coins.length > 0) {
-            // Update King of the Hill
             updateKOTH(coins[0]);
-            // Render the rest in the grid
             renderRealCoins(coins.slice(1));
+            console.log("✅ Live Data Synced.");
         }
     } catch (err) {
-        console.error("Real API Error:", err);
-        // If everything fails, show a clear message or retry
-        if (coinGrid.innerHTML === "") {
-            coinGrid.innerHTML = '<p style="color:white; text-align:center; grid-column: 1/-1;">⏳ Syncing with Solana Blockchain...</p>';
+        console.error("Fetch failed:", err);
+        // Show a helpful message if it's the first load
+        if (coinGrid.innerHTML === "" || coinGrid.innerHTML.includes("Syncing")) {
+            coinGrid.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                    <p style="color: var(--accent-green); font-weight: bold; font-size: 18px;">🔄 Connecting to Pump.fun Live Stream...</p>
+                    <p style="color: var(--text-dim); font-size: 14px; margin-top: 10px;">Please wait while we bypass network restrictions.</p>
+                </div>
+            `;
         }
     }
 }
