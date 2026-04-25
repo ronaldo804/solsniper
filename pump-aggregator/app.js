@@ -2,54 +2,36 @@
 const OWNER_ADDRESS = "2yGjdYrjVRbfK232A1GmNLDB8sLJ93gsTLMeEHjVYPQm";
 const PLATFORM_FEE_PERCENT = 1.0; // 1% Fee
 const MOCK_COINS = [
-    {
-        name: "ELON DUCK",
-        symbol: "DUCK",
-        mcap: "$12,450",
-        progress: 45,
-        img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Duck1",
-        desc: "The first duck on Mars. Quack quack to the moon! 🚀"
-    },
-    {
-        name: "SOLANA CAT",
-        symbol: "SCAT",
-        mcap: "$8,200",
-        progress: 22,
-        img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Cat2",
-        desc: "Meow! Fastest cat in the crypto space. Solana native."
-    },
-    {
-        name: "PUMP IT",
-        symbol: "PUMP",
-        mcap: "$45,900",
-        progress: 78,
-        img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Pump3",
-        desc: "Just pump it. No logic, just vibes and green candles."
-    },
-    {
-        name: "Meme AI",
-        symbol: "MAI",
-        mcap: "$2,100",
-        progress: 5,
-        img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=AI4",
-        desc: "Artificial Intelligence meets Dank Memes. Truly revolutionary."
-    },
-    {
-        name: "DOGE 2.0",
-        symbol: "DOGE2",
-        mcap: "$105,000",
-        progress: 100,
-        img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Doge5",
-        desc: "The legend returns. Graduating to Raydium soon!"
-    },
-    {
-        name: "FROG SOL",
-        symbol: "FROG",
-        mcap: "$3,400",
-        progress: 12,
-        img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Frog6",
-        desc: "Ribbit! Jumping through the bonding curve at light speed."
-    }
+    { name: "ELON DUCK", symbol: "DUCK", mcap: "$12,450", progress: 45, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Duck1", desc: "The first duck on Mars. Quack quack to the moon! 🚀" },
+    { name: "SOLANA CAT", symbol: "SCAT", mcap: "$8,200", progress: 22, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Cat2", desc: "Meow! Fastest cat in the crypto space. Solana native." },
+    { name: "PUMP IT", symbol: "PUMP", mcap: "$45,900", progress: 78, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Pump3", desc: "Just pump it. No logic, just vibes and green candles." },
+    { name: "Meme AI", symbol: "MAI", mcap: "$2,100", progress: 5, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=AI4", desc: "Artificial Intelligence meets Dank Memes." },
+    { name: "DOGE 2.0", symbol: "DOGE2", mcap: "$105,000", progress: 100, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Doge5", desc: "The legend returns. Graduating to Raydium soon!" },
+    { name: "FROG SOL", symbol: "FROG", mcap: "$3,400", progress: 12, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Frog6", desc: "Ribbit! Jumping through the bonding curve." },
+    { name: "PEPE KING", symbol: "PEPE", mcap: "$15,200", progress: 65, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Pepe7", desc: "The king of all memes is back on Solana." },
+    { name: "SHIBA MOON", symbol: "SHIB", mcap: "$9,800", progress: 30, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Shiba8", desc: "Targeting the moon with high speed." },
+    { name: "WIF HAT", symbol: "WIF", mcap: "$250,000", progress: 95, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Wif9", desc: "A dog with a hat. What else do you need?" },
+    { name: "BONK 2", symbol: "BONK2", mcap: "$5,600", progress: 18, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Bonk10", desc: "The most community-driven token." },
+    { name: "ROCKET SOL", symbol: "ROCK", mcap: "$4,100", progress: 8, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Rock11", desc: "Blasting off into the atmosphere." },
+    { name: "GALAXY", symbol: "GLX", mcap: "$1,200", progress: 2, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Glx12", desc: "Explore the vast galaxy of Solana." },
+    { name: "NINJA DUCK", symbol: "NDUCK", mcap: "$6,700", progress: 40, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Ninja13", desc: "Quiet but deadly. The ninja of memes." },
+    { name: "CYBER PUNK", symbol: "CPNK", mcap: "$32,000", progress: 55, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Cyber14", desc: "The future is here on Solana." },
+    { name: "CHAD SOL", symbol: "CHAD", mcap: "$18,900", progress: 70, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Chad15", desc: "Only for the strongest chads." },
+    { name: "ALPHA", symbol: "ALP", mcap: "$4,500", progress: 15, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Alpha16", desc: "The first and the best." },
+    { name: "BETA CAT", symbol: "BCAT", mcap: "$2,300", progress: 10, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Beta17", desc: "Testing the limits of speed." },
+    { name: "GAMMA", symbol: "GAM", mcap: "$7,800", progress: 25, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Gam18", desc: "The third generation of meme coins." },
+    { name: "ZETA", symbol: "ZET", mcap: "$1,100", progress: 1, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Zet19", desc: "Small cap, big potential." },
+    { name: "OMEGA", symbol: "OMG", mcap: "$95,000", progress: 88, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Omg20", desc: "The final meme coin you will ever need." },
+    { name: "SPEEDY", symbol: "SPD", mcap: "$3,300", progress: 20, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Spd21", desc: "Fast transactions, faster gains." },
+    { name: "FLASH", symbol: "FLS", mcap: "$5,900", progress: 35, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Fls22", desc: "Gone in a flash." },
+    { name: "SONIC", symbol: "SON", mcap: "$12,000", progress: 50, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Son23", desc: "Gotta go fast on Solana." },
+    { name: "TAILS", symbol: "TAI", mcap: "$8,500", progress: 28, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Tai24", desc: "The perfect companion token." },
+    { name: "KNUCKLES", symbol: "KNU", mcap: "$4,200", progress: 14, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Knu25", desc: "He knows the way." },
+    { name: "MARIO", symbol: "MAR", mcap: "$15,000", progress: 60, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Mar26", desc: "It's-a me, Solana!" },
+    { name: "LUIGI", symbol: "LUI", mcap: "$7,000", progress: 33, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Lui27", desc: "The greener brother." },
+    { name: "PEACH", symbol: "PCH", mcap: "$2,500", progress: 9, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Pch28", desc: "Sweet gains for everyone." },
+    { name: "BOWSER", symbol: "BOW", mcap: "$22,000", progress: 80, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Bow29", desc: "Dominating the market." },
+    { name: "YOSHI", symbol: "YOS", mcap: "$6,000", progress: 42, img: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Yos30", desc: "Swallowing the competition." }
 ];
 
 const coinGrid = document.getElementById('coinGrid');
@@ -168,24 +150,37 @@ window.addEventListener('click', (event) => {
 });
 
 function generateBurnerWallet() {
-    // In a real app, we'd use: const keypair = solanaWeb3.Keypair.generate();
-    // For this demo, we simulate a Solana address
-    const chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
-    let mockAddr = "";
-    for (let i = 0; i < 44; i++) mockAddr += chars.charAt(Math.floor(Math.random() * chars.length));
-    
-    const mockPrivKey = "5J..." + Math.random().toString(36).substring(7);
+    if (typeof solanaWeb3 === 'undefined') {
+        alert("❌ Solana library not loaded. Check your internet connection.");
+        return;
+    }
 
-    // Save to LocalStorage
+    // ✅ Generate REAL Solana keypair
+    const keypair = solanaWeb3.Keypair.generate();
+    const address = keypair.publicKey.toString();
+
+    // Store secret key as JSON array (safe for localStorage)
+    const secretKeyArray = Array.from(keypair.secretKey);
+    
+    // Encode private key as base58 for display (standard Solana format)
+    let privateKeyBase58;
+    try {
+        privateKeyBase58 = bs58.encode(keypair.secretKey);
+    } catch(e) {
+        // Fallback if bs58 not loaded
+        privateKeyBase58 = btoa(String.fromCharCode(...keypair.secretKey.slice(0, 32)));
+    }
+
     const burner = {
-        address: mockAddr,
-        privateKey: mockPrivKey,
+        address: address,
+        privateKey: privateKeyBase58,
+        secretKeyArray: secretKeyArray, // Full 64-byte keypair for signing
         autoSign: true
     };
-    localStorage.setItem('burnerWallet', JSON.stringify(burner));
 
+    localStorage.setItem('burnerWallet', JSON.stringify(burner));
     updateBurnerUI(burner);
-    alert("New Burner Wallet Generated! Copy your Private Key if needed.");
+    alert(`✅ Real Solana Wallet Generated!\n\n📍 Address: ${address.slice(0,8)}...\n\n⚠️ Save your Private Key before clearing browser data!`);
 }
 
 function updateBurnerUI(burner) {

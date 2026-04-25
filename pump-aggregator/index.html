@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antigravity Pump | Solana Meme Launchpad</title>
+    <title>SolSniper | #1 Solana Meme Token Aggregator</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/@solana/web3.js@1.87.6/lib/index.iife.min.js"></script>
+    <script src="https://bundle.run/bs58@4.0.1"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>
 </head>
 <body>
@@ -14,8 +16,8 @@
 
     <header class="navbar">
         <div class="logo">
-            <span class="logo-icon">🚀</span>
-            <span class="logo-text">ANTIGRAVITY <span class="accent">PUMP</span></span>
+            <span class="logo-icon">🎯</span>
+            <span class="logo-text">SOL<span class="accent">SNIPER</span></span>
         </div>
         <div class="nav-search">
             <i data-lucide="search"></i>
@@ -88,7 +90,9 @@
         <div class="modal-content sniper-content">
             <div class="modal-header">
                 <h2>🎯 Fast Trade Settings</h2>
-                <i data-lucide="x" class="close-modal" id="closeSniper"></i>
+                <button class="btn-close-modal" id="closeSniper">
+                    <i data-lucide="x"></i>
+                </button>
             </div>
             
             <div class="burner-status-card">

@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELON DUCK [DUCK] | Antigravity Pump</title>
+    <title>SolSniper | Token Trading</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="coin-style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://unpkg.com/@solana/web3.js@1.87.6/lib/index.iife.min.js"></script>
 </head>
 <body>
     <div class="background-glow"></div>
 
     <header class="navbar">
         <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
-            <span class="logo-icon">🚀</span>
-            <span class="logo-text">ANTIGRAVITY <span class="accent">PUMP</span></span>
+            <span class="logo-icon">🎯</span>
+            <span class="logo-text">SOL<span class="accent">SNIPER</span></span>
         </div>
         <div class="nav-actions">
             <button class="btn-primary">0x8b...f6</button>
@@ -73,16 +74,16 @@
 
                     <div class="fee-info">
                         <div class="fee-row">
-                            <span>Platform Fee (1%)</span>
+                            <span>Service Fee</span>
                             <span id="platformFee">0.00 SOL</span>
                         </div>
                         <div class="fee-row">
-                            <span>Total</span>
+                            <span>Total Amount</span>
                             <span id="totalAmount">0.00 SOL</span>
                         </div>
                     </div>
 
-                    <button class="btn-execute-trade">Place Trade</button>
+                    <button class="btn-execute-trade" id="tradeBtn" onclick="executeTrade(currentMode === 'buy')">⚡ Buy Now</button>
                 </div>
 
                 <div class="progress-card">

@@ -350,15 +350,30 @@ body {
     margin-bottom: 20px;
 }
 
-.close-modal { 
-    cursor: pointer; 
-    color: var(--text-dim); 
-    transition: color 0.2s, transform 0.2s;
+.btn-close-modal {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.close-modal:hover { 
-    color: #ef4444; 
+.btn-close-modal:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.2);
     transform: rotate(90deg);
+}
+
+.btn-close-modal i {
+    width: 20px;
+    height: 20px;
 }
 
 .burner-status-card {
